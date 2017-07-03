@@ -79,7 +79,7 @@ export default {
       }
 
       if (this.options.some(o => !o.text.length)) {
-        this.$refs.alert.notify('error', 'You forgot to fill some options.');
+        this.$refs.alert.notify('error', 'You forgot to fill up some options.');
         return;
       }
 
