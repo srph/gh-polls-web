@@ -195,6 +195,11 @@ html, body {
   border: 1px solid var(--color-gray);
 }
 
+.form-input:focus {
+  outline: 0;
+  border-color: var(--color-info);
+}
+
 .form-input.-danger {
   border-color: var(--color-red);
 }
