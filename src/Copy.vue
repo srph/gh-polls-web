@@ -40,6 +40,7 @@
   color: var(--color-info);
   font-size: var(--font-smallee);
   font-family: var(--font-family);
+  font-weight: 500;
   text-transform: uppercase;
   background: transparent;
   border: 1px solid transparent;
