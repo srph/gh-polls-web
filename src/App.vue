@@ -13,7 +13,6 @@
     <div v-else>
       <header class="menu-heading">
         <h5 class="title">Poll Options</h5>
-        <copy></copy>
       </header>
 
       <div class="panel-box">
@@ -127,9 +126,9 @@ export default {
   --color-black: #000;
   --color-gray: #B4B4B4;
   --color-dark-gray: #434343;
-  --color-red: #E23131;
-  --color-info: #5DB7FC;
-  --color-success: #2BE387;
+  --color-red: #FC6D6B;
+  --color-info: #1E6EF9;
+  --color-success: #5DC722;
   --form-size: 40px;
   --font-size: 14px;
   --font-smallee: 12px;
