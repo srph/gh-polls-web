@@ -18,8 +18,8 @@
 
       <div class="panel-box">
         <div class="item" v-for="(option, index) in options" :key="index">
-          <input v-model="option.text" :class="{ 'form-input': true, '-danger': option.text.length }" type="text" placeholder="Enter option...">
-          <button type="button" class="remove" title="Remove this option" tabindex="-1" ref="options" @click="rm(index)">
+          <input v-model="option.text" :class="{ 'form-input': true, '-danger': option.text.length }" type="text" placeholder="Enter option..." ref="options">
+          <button type="button" class="remove" title="Remove this option" tabindex="-1" @click="rm(index)">
             <icon name="remove"></icon>
           </button>
         </div>
