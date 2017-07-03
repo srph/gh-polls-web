@@ -36,6 +36,8 @@
         </button>
       </div>
     </div>
+
+    <ui-footer></ui-footer>
   </div>
 </template>
 
@@ -46,6 +48,7 @@ import marked from 'marked';
 import config from './config';
 import Alert from './Alert';
 import Copy from './Copy';
+import Footer from './Footer';
 
 export default {
   name: 'app',
@@ -115,7 +118,8 @@ export default {
   },
   components: {
     Alert,
-    Copy
+    Copy,
+    'ui-footer': Footer
   }
 }
 </script>

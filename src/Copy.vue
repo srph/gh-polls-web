@@ -32,7 +32,7 @@
   }
 </script>
 
-<style>
+<style scoped>
 .copy {
   position: relative;
   display: inline-block;
