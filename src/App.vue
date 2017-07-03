@@ -5,9 +5,6 @@
     <div v-if="generated">
       <header class="menu-heading">
         <h5 class="title">Generated Poll</h5>
-        <button type="button" class="copy" @click="copy" title="Copy to clipboard">
-          Copy
-        </button>
       </header>
 
       <div class="preview-box" v-html="preview"></div>
@@ -16,6 +13,7 @@
     <div v-else>
       <header class="menu-heading">
         <h5 class="title">Poll Options</h5>
+        <copy></copy>
       </header>
 
       <div class="panel-box">
@@ -48,6 +46,7 @@ import copy from 'copy-text-to-clipboard';
 import marked from 'marked';
 import config from './config';
 import Alert from './Alert';
+import Copy from './Copy';
 
 export default {
   name: 'app',
@@ -115,7 +114,8 @@ export default {
     }
   },
   components: {
-    Alert
+    Alert,
+    Copy
   }
 }
 </script>
@@ -244,15 +244,4 @@ html, body {
   text-transform: uppercase;
 }
 
-.menu-heading > .copy {
-  display: inline-block;
-  padding: 0;
-  color: var(--color-info);
-  font-size: var(--font-smallee);
-  font-family: var(--font-family);
-  text-transform: uppercase;
-  background: transparent;
-  border: 1px solid transparent;
-  cursor: pointer;
-}
 </style>
