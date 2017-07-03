@@ -20,7 +20,7 @@
 
       <div class="panel-box">
         <div class="item" v-for="(option, index) in options" :key="index">
-          <input v-model="option.text" class="form-input" type="text" placeholder="Enter option...">
+          <input v-model="option.text" :class="{ 'form-input': true, '-danger': option.text.length }" type="text" placeholder="Enter option...">
           <button type="button" class="remove" title="Remove this option" tabindex="-1" ref="options" @click="rm(index)">
             <icon name="remove"></icon>
           </button>
@@ -30,6 +30,8 @@
           Add another option
         </button>
       </div>
+
+      <alert ref="alert"></alert>
 
       <div class="generate-action">
         <button class="button" type="button" @click="generate">
@@ -45,6 +47,7 @@ import axios from 'axios';
 import copy from 'copy-text-to-clipboard';
 import marked from 'marked';
 import config from './config';
+import Alert from './Alert';
 
 export default {
   name: 'app',
@@ -76,14 +79,20 @@ export default {
         return;
       }
 
+      if (this.options.some(o => !o.text.length)) {
+        return;
+      }
+
       this.loading = true
 
       return axios.post('/poll', { options: this.options.map(o => o.text) })
         .then(res => {
+          this.$refs.alert.notify('success', 'The poll was successfully generated!');
           this.loading = false
           this.generated = true
           this.id = res.data.id
         }, err => {
+          this.$refs.alert.notify('error', 'An error occured trying to generate a poll.');
           this.loading = false
         });
     },
@@ -104,6 +113,9 @@ export default {
     preview() {
       return marked(this.markdown);
     }
+  },
+  components: {
+    Alert
   }
 }
 </script>
@@ -116,6 +128,7 @@ export default {
   --color-dark-gray: #434343;
   --color-red: #E23131;
   --color-info: #5DB7FC;
+  --color-success: #2BE387;
   --form-size: 40px;
   --font-size: 14px;
   --font-smallee: 12px;
@@ -179,6 +192,10 @@ html, body {
   font-family: var(--font-family);
   line-height: calc(var(--form-size) - 1);
   border: 1px solid var(--color-gray);
+}
+
+.form-input.-danger {
+  border-color: var(--color-red);
 }
 
 .panel-box {
