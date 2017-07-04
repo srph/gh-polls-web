@@ -31,7 +31,7 @@
           </div>
         </draggable>
 
-        <button type="button" @focus="add" class="add">
+        <button type="button" @focus="trigger" @click="add" class="add" ref="add">
           Add another option
         </button>
       </div>
@@ -74,6 +74,10 @@ export default {
     }
   },
   methods: {
+    trigger() {
+      this.$refs.add.click()
+    },
+
     add() {
       this.counter = this.counter + 1;
       this.options.push({ id: this.counter + 1, text: '' })
