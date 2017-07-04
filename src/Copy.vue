@@ -8,8 +8,13 @@
 </template>
 
 <script>
+  import copy from 'copy-text-to-clipboard';
+
   export default {
     name: 'copy',
+    props: {
+      text: String
+    },
     data() {
       return {
         show: false,
@@ -18,14 +23,14 @@
     },
     methods: {
       click() {
-        this.$emit('click');
+        copy(this.text)
         // So it always go into the starting animation state
         // when the user tries to spam click.
         this.show = false;
+        clearTimeout(this.timeout);
         this.$nextTick(() => {
-          clearTimeout(this.timeout);
           this.show = true;
-          this.timeout = setTimeout(() => this.show = false, 280);
+          this.timeout = setTimeout(() => this.show = false, 250);
         });
       }
     }
@@ -63,7 +68,7 @@
     transform: translateY(0);
   }
 
-  50% {
+  30% {
     opacity: 1;
   }
 

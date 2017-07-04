@@ -5,6 +5,7 @@
     <div v-if="generated">
       <header class="menu-heading">
         <h5 class="title">Generated Poll</h5>
+        <copy :copy="markdown"></copy>
       </header>
 
       <div class="preview-box" v-html="preview"></div>
@@ -43,7 +44,6 @@
 
 <script>
 import axios from 'axios';
-import copy from 'copy-text-to-clipboard';
 import marked from 'marked';
 import config from './config';
 import Alert from './Alert';
@@ -97,10 +97,6 @@ export default {
           this.$refs.alert.notify('error', 'An error occured trying to generate a poll.');
           this.loading = false
         });
-    },
-
-    copy() {
-      copy(this.markdown)
     }
   },
   computed: {
