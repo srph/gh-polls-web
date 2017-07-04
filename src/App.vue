@@ -32,8 +32,9 @@
       <alert ref="alert"></alert>
 
       <div class="generate-action">
-        <button class="button" type="button" @click="generate">
-          Generate
+        <button class="button" type="button" @click="generate" :disabled="loading">
+          <loader v-if="loading"></loader>
+          <span v-else>Generate</span>
         </button>
       </div>
     </div>
@@ -49,6 +50,7 @@ import config from './config';
 import Alert from './Alert';
 import Copy from './Copy';
 import Footer from './Footer';
+import Loader from './Loader';
 
 export default {
   name: 'app',
@@ -115,6 +117,7 @@ export default {
   components: {
     Alert,
     Copy,
+    Loader,
     'ui-footer': Footer
   }
 }
@@ -177,6 +180,10 @@ html, body {
 .button:hover {
   background: var(--color-dark-gray);
   transition: 100ms all ease;
+}
+
+.button:disabled {
+  cursor: not-allowed;
 }
 
 .generate-action {
