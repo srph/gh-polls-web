@@ -187,6 +187,7 @@ html, body {
   line-height: calc(var(--form-size) - 1);
   font-family: var(--font-family);
   text-transform: uppercase;
+  letter-spacing: 1px;
   background: var(--color-black);
   border: 1px solid transparent;
   cursor: pointer;
