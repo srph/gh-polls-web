@@ -118,7 +118,7 @@ export default {
   computed: {
     markdown() {
       return this.options.map(option => {
-        option = decodeURIComponent(option.text);
+        option = encodeURIComponent(option.text);
         const image = `![](${config.api}/poll/${this.id}/${option})`;
         return `[${image}](${config.api}/poll/${this.id}/${option}/vote)`
       }).join('\n')
