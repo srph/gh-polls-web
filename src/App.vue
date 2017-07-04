@@ -19,12 +19,17 @@
       </header>
 
       <div class="panel-box">
-        <div class="item" v-for="(option, index) in options" :key="index">
-          <input v-model="option.text" :class="{ 'form-input': true, '-danger': !option.text.length }" type="text" placeholder="Enter option..." ref="options">
-          <button type="button" class="remove" title="Remove this option" tabindex="-1" @click="rm(index)">
-            <icon name="remove"></icon>
-          </button>
-        </div>
+        <draggable v-model="options" :options="{ group: 'options', handle: '.handle' }" class="inner">
+          <div class="item" v-for="(option, index) in options" :key="option">
+            <div class="handle" title="Drag item around to sort">
+              <icon name="ellipsis-v"></icon>
+            </div>
+            <input v-model="option.text" :class="{ 'form-input': true, '-danger': !option.text.length }" type="text" placeholder="Enter option..." ref="options">
+            <button type="button" class="remove" title="Remove this option" tabindex="-1" @click="rm(index)">
+              <icon name="remove"></icon>
+            </button>
+          </div>
+        </draggable>
 
         <button type="button" @focus="add" class="add">
           Add another option
@@ -49,6 +54,7 @@
 import axios from 'axios';
 import marked from 'marked';
 import config from './config';
+import Draggable from 'vuedraggable';
 import Alert from './Alert';
 import Copy from './Copy';
 import Footer from './Footer';
@@ -120,6 +126,7 @@ export default {
     Alert,
     Copy,
     Loader,
+    Draggable,
     'ui-footer': Footer
   }
 }
@@ -216,18 +223,33 @@ html, body {
   margin-bottom: 64px;
 }
 
-.panel-box > .item {
+.panel-box .item {
   display: flex;
   margin-bottom: 16px;
+  margin-left: -40px;
+  transition: 300ms all cubic-bezier(.55,0,.1,1);
 }
 
-.panel-box > .item > .remove {
+.panel-box .item.sortable-chosen {
+  opacity: 0.2;
+}
+
+.panel-box .item > .remove {
   display: inline-block;
   padding: 0 16px;
   color: var(--color-red);
   background: transparent;
   border: 1px solid transparent;
   cursor: pointer;
+}
+
+.panel-box .item > .handle {
+  display: inline-block;
+  padding: 8px 16px;
+  color: var(--color-black);
+  background: transparent;
+  border: 1px solid transparent;
+  cursor: grab;
 }
 
 .panel-box > .add {
@@ -258,5 +280,4 @@ html, body {
   font-size: var(--font-smallee);
   text-transform: uppercase;
 }
-
 </style>

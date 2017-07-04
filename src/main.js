@@ -6,6 +6,7 @@ import 'normalize.css';
 
 import Icon from 'vue-awesome';
 import 'vue-awesome/icons/remove'
+import 'vue-awesome/icons/ellipsis-v'
 Vue.component('icon', Icon);
 
 import axios from 'axios';
