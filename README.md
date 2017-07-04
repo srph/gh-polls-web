@@ -2,6 +2,8 @@
 
 > A web front-end for [GitHub Polls](https://github.com/tj/gh-polls)
 
+![Preview](preview.jpg)
+
 ## Build Setup
 
 ``` bash
