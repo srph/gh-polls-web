@@ -181,7 +181,7 @@ html, body {
 
 .button {
   font-size: var(--font-smallee);
-  padding: 0 16px;
+  padding: 0 24px;
   height: var(--form-size);
   color: var(--color-white);
   line-height: calc(var(--form-size) - 1);
