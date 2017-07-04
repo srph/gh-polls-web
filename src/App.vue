@@ -105,7 +105,7 @@ export default {
 
       return axios.post('/poll', { options: this.options.map(o => o.text) })
         .then(res => {
-          this.$refs.alert.notify('success', 'The poll was successfully generated! Feel free to copy ');
+          this.$refs.alert.notify('success', 'The poll was successfully generated!');
           this.loading = false
           this.generated = true
           this.id = res.data.id
