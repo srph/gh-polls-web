@@ -9,6 +9,8 @@
       </header>
 
       <div class="preview-box" v-html="preview"></div>
+
+      <alert ref="alert"></alert>
     </div>
 
     <div v-else>
@@ -239,6 +241,7 @@ html, body {
 }
 
 .preview-box {
+  margin-bottom: 64px;
   padding: 8px;
   border: 1px solid var(--color-gray);
 }
