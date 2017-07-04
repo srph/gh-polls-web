@@ -1,6 +1,6 @@
 # gh-polls-web
 
-> A web front-end for tj/gh-polls
+> A web front-end for [GitHub Polls](https://github.com/tj/gh-polls)
 
 ## Build Setup
 
