@@ -5,7 +5,7 @@
     <div v-if="generated">
       <header class="menu-heading">
         <h5 class="title">Generated Poll</h5>
-        <copy :copy="markdown"></copy>
+        <copy :text="markdown"></copy>
       </header>
 
       <div class="preview-box" v-html="preview"></div>
