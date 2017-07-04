@@ -5,7 +5,7 @@ import App from './App'
 import 'normalize.css';
 
 import Icon from 'vue-awesome';
-import 'vue-awesome/icons'
+import 'vue-awesome/icons/remove'
 Vue.component('icon', Icon);
 
 import axios from 'axios';
