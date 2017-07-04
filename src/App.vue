@@ -24,7 +24,7 @@
             <div class="handle" title="Drag item around to sort">
               <icon name="ellipsis-v"></icon>
             </div>
-            <input v-model="option.text" :class="{ 'form-input': true, '-danger': !option.text.length }" type="text" placeholder="Enter option..." ref="options">
+            <input v-model="option.text" :class="{ 'form-input': true, '-danger': errors[option.id] }" type="text" placeholder="Enter option..." ref="options">
             <button type="button" class="remove" title="Remove this option" tabindex="-1" @click="rm(index)">
               <icon name="remove"></icon>
             </button>
@@ -54,6 +54,7 @@
 import axios from 'axios';
 import marked from 'marked';
 import config from './config';
+import * as utils from './utils';
 import Draggable from 'vuedraggable';
 import Alert from './Alert';
 import Copy from './Copy';
@@ -67,12 +68,15 @@ export default {
       options: [{ text: '' }],
       loading: false,
       generated: false,
+      errors: {},
+      counter: 0,
       id: '',
     }
   },
   methods: {
     add() {
-      this.options.push({ text: '' })
+      this.counter = this.counter + 1;
+      this.options.push({ id: this.counter + 1, text: '' })
 
       this.$nextTick(() => {
         this.$refs.options[this.$refs.options.length - 1].focus()
@@ -91,10 +95,12 @@ export default {
       }
 
       if (this.options.some(o => !o.text.length)) {
+        this.errors = utils.objectify(this.options.filter(o => !o.text.length).map(o => o.id), true)
         this.$refs.alert.notify('error', 'You forgot to fill up some options.');
         return;
       }
 
+      this.errors = {};
       this.loading = true
 
       return axios.post('/poll', { options: this.options.map(o => o.text) })
