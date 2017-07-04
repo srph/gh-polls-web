@@ -93,7 +93,7 @@ export default {
 
       return axios.post('/poll', { options: this.options.map(o => o.text) })
         .then(res => {
-          this.$refs.alert.notify('success', 'The poll was successfully generated!');
+          this.$refs.alert.notify('success', 'The poll was successfully generated! Feel free to copy ');
           this.loading = false
           this.generated = true
           this.id = res.data.id
@@ -137,7 +137,7 @@ export default {
   --form-size: 40px;
   --font-size: 14px;
   --font-smallee: 12px;
-  --font-family: "Proxima Nova", Helvetica, sans-serif;
+  --font-family: "Proxima Nova", San Francisco, -apple-system, BlinkMacSystemFont, ".SFSNText-Regular", Segoe UI, Ubuntu, Helvetica, sans-serif;
 }
 
 * {
