@@ -150,7 +150,7 @@ export default {
   --color-dark-gray: #434343;
   --color-red: #FC6D6B;
   --color-info: #1E6EF9;
-  --color-success: #5DC722;
+  --color-success: #01dc87;
   --form-size: 40px;
   --font-size: 14px;
   --font-smallee: 12px;
