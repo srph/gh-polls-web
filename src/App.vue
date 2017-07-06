@@ -276,6 +276,7 @@ html, body {
 .preview-box {
   margin-bottom: 64px;
   padding: 8px;
+  text-align: center;
   border: 1px solid var(--color-gray);
 }
 
