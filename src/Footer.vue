@@ -21,6 +21,7 @@
   .footer {
     margin-top: 240px;
     padding-top: 24px;
+    padding-bottom: 24px;
     display: flex;
     border-top: 1px solid #ddd;
     font-size: var(--font-smallee);
