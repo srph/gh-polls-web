@@ -1,7 +1,7 @@
 <template>
-  <ui-button preset="primary" type="button" @click="click" title="Copy to clipboard">
+  <ui-button preset="primary" type="button" @click="click" title="Copy generated poll markdown to clipboard">
     <span class="copy">
-      Copy
+      Copy Markdown
       <span v-if="show" class="textee">
         Copied!
       </span>

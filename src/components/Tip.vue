@@ -51,6 +51,7 @@
     font-family: var(--font-montserrat);
     border: 0;
     outline: 0;
+    font-weight: 600;
     cursor: pointer;
     margin-left: 8px;
   }

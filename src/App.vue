@@ -1,50 +1,50 @@
 <template>
   <ui-container>
-    <h1 class="title-heading">GitHub Polls</h1>
+    <ui-title-heading></ui-title-heading>
 
     <ui-alert ref="alert"></ui-alert>
 
-    <div v-if="generated">
-      <ui-panel title="Generated Poll">
-        <copy-button slot="action" :text="markdown"></copy-button>
+    <div class="main-content">
+      <div v-if="generated">
+        <ui-panel title="Generated Poll">
+          <copy-button slot="action" :text="markdown"></copy-button>
 
-        <div slot="body" class="preview-box" v-html="preview"></div>
-      </ui-panel>
-    </div>
+          <div slot="body" class="preview-box" v-html="preview"></div>
+        </ui-panel>
+      </div>
 
-    <div v-else>
-      <ui-panel title="Poll Options">
-        <ui-button slot="action" type="button"
-          @click="generate"
-          :disabled="loading"
-          title="Generate the poll">
-          <ui-loader v-if="loading"></ui-loader>
-          <span v-else>Generate</span>
-        </ui-button>
-
-        <div slot="body">
-          <draggable v-model="options" :options="{ group: 'options', handle: '.handle' }" class="inner">
-            <poll-option v-for="(option, index) in options"
-              :key="option.id"
-              :option="option"
-              :index="index"
-              :error="errors[option.id]"
-              ref="options"
-              @change="change"
-              @remove="rm">
-            </poll-option>
-          </draggable>
-
-          <ui-button type="button" @focus="trigger" @click="add" ref="add">
-            Add another option
+      <div v-else>
+        <ui-panel title="Poll Options">
+          <ui-button slot="action" type="button"
+            @click="generate"
+            :disabled="loading"
+            title="Generate the poll">
+            <ui-loader v-if="loading"></ui-loader>
+            <span v-else>Generate</span>
           </ui-button>
-        </div>
-      </ui-panel>
 
-      <tip></tip>
+          <div slot="body">
+            <draggable v-model="options" :options="{ group: 'options', handle: '.handle' }" class="inner">
+              <poll-option v-for="(option, index) in options"
+                :key="option.id"
+                :option="option"
+                :index="index"
+                :error="errors[option.id]"
+                ref="options"
+                @change="change"
+                @remove="rm">
+              </poll-option>
+            </draggable>
+
+            <ui-button type="button" @focus="trigger" @click="add" ref="add">
+              Add another option
+            </ui-button>
+          </div>
+        </ui-panel>
+
+        <tip></tip>
+      </div>
     </div>
-
-    <ui-footer></ui-footer>
   </ui-container>
 </template>
 
@@ -59,10 +59,10 @@ import UiPanel from './components/UiPanel'
 import UiButton from './components/UiButton'
 import UiAlert from './components/UiAlert'
 import UiLoader from './components/UiLoader'
+import UiTitleHeading from './components/UiTitleHeading'
 import Tip from './components/Tip'
 import PollOption from './components/PollOption'
 import CopyButton from './components/CopyButton'
-import UiFooter from './components/UiFooter'
 
 export default {
   name: 'app',
@@ -151,7 +151,7 @@ export default {
     UiPanel,
     UiButton,
     UiLoader,
-    'ui-footer': UiFooter
+    UiTitleHeading
   }
 }
 </script>
@@ -161,6 +161,7 @@ export default {
   --color-white: #fff;
   --color-black: #000;
   --color-light-silver: #f9fafb;
+  --color-dark-silver: #8898aa;
   --color-silver: #d9e3ed;
   --color-gray: #B4B4B4;
   --color-dark-gray: #434343;
@@ -192,16 +193,12 @@ html, body {
   background: var(--color-light-silver);
 }
 
-.title-heading {
-  margin-top: 24px;
-  margin-bottom: 80px;
-  text-align: center;
-  font-weight: 300;
-  font-size: 40px;
-}
-
 .preview-box {
   text-align: center;
+}
+
+.main-content {
+  margin-bottom: 160px;
 }
 
 /**

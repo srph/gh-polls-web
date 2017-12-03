@@ -1,17 +1,15 @@
 <template>
-  <div class="alert-placeholder">
-    <t-fade-to-top>
-      <p :class="{ 'alert-box': true, '-danger': type === 'error', '-success': type === 'success' }" v-if="message">
-        <span v-if="type === 'success'" class="highlight">
-          Nice!
-        </span>
-        <span v-else class="highlight">
-          Oh no!
-        </span>
-        {{ message }}
-      </p>
-    </t-fade-to-top>
-  </div>
+  <t-fade-to-top>
+    <p :class="{ 'alert-box': true, '-danger': type === 'error', '-success': type === 'success' }" v-if="message">
+      <span v-if="type === 'success'" class="highlight">
+        Nice!
+      </span>
+      <span v-else class="highlight">
+        Oh no!
+      </span>
+      {{ message }}
+    </p>
+  </t-fade-to-top>
 </template>
 
 <script>
@@ -45,14 +43,10 @@
 </script>
 
 <style scoped>
-  .alert-placeholder {
-    height: 80px;
-  }
 
   .alert-box {
     padding: 16px;
-    margin-top: 0;
-    margin-bottom: 64px;
+    margin-bottom: 24px;
     text-align: center;
     border: 1px solid var(--color-silver);
     border-radius: var(--border-radius);
