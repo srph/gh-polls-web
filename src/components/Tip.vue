@@ -81,6 +81,8 @@
     font-size: 12px;
     vertical-align: middle;
     line-height: 1;
-    background: var(--color-silver);
+    background: var(--color-white);
+    border: 1px solid var(--color-silver);
+    border-radius: var(--border-radius);
   }
 </style>
