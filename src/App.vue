@@ -62,7 +62,7 @@ import UiLoader from './components/UiLoader'
 import Tip from './components/Tip'
 import PollOption from './components/PollOption'
 import CopyButton from './components/CopyButton'
-import Footer from './Footer'
+import UiFooter from './components/UiFooter'
 
 export default {
   name: 'app',
@@ -151,7 +151,7 @@ export default {
     UiPanel,
     UiButton,
     UiLoader,
-    'ui-footer': Footer
+    'ui-footer': UiFooter
   }
 }
 </script>
