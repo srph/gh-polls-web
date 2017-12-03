@@ -2,10 +2,10 @@
   <header class="title-heading">
     <h1 class="title">GitHub Polls</h1>
     <nav class="nav">
-      <a href="https://github.com/apex/gh-polls#about" class="link">How It Works</a>
-      <a href="https://github.com/apex/gh-polls" class="link">CLI</a>
-      <a href="https://github.com/srph/gh-polls-web" class="link">GitHub</a>
-      <a href="https://twitter.com/_srph" class="link">@_srph</a>
+      <a href="https://github.com/apex/gh-polls#about" class="link" target="_blank" title="GitHub Polls explained">How It Works</a>
+      <a href="https://github.com/apex/gh-polls" class="link" target="_blank" title="GitHub Polls CLI">CLI</a>
+      <a href="https://github.com/srph/gh-polls-web" class="link" target="_blank" title="GitHub">GitHub</a>
+      <a href="https://twitter.com/_srph" class="link" target="_blank" title="Twitter">@_srph</a>
     </nav>
   </header>
 </template>
