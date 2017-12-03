@@ -2,7 +2,7 @@
 
 > Generate polls for GitHub issues. Web front-end for [GitHub Polls](https://github.com/tj/gh-polls).
 
-![Preview](preview.jpg)
+![Preview](preview.png)
 
 ## Build Setup
 
