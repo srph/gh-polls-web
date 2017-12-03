@@ -30,6 +30,7 @@
                 :option="option"
                 :index="index"
                 :error="errors[option.id]"
+                :solo="options.length === 1"
                 ref="options"
                 @change="change"
                 @remove="rm">

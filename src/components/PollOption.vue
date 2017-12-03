@@ -2,7 +2,7 @@
   <div :class="{ 'item': true, '-focused': focused || hovered }"
     @mouseenter="mouseenter"
     @mouseleave="mouseleave">
-    <div class="handle" title="Drag item around to sort">
+    <div class="handle" title="Drag item around to sort" v-if="!solo">
       <icon name="ellipsis-v"></icon>
     </div>
 
@@ -16,7 +16,7 @@
       ref="input">
     </ui-input>
 
-    <button type="button" class="remove" title="Remove this option" tabindex="-1" @click="remove">
+    <button type="button" class="remove" title="Remove this option" tabindex="-1" @click="remove" v-if="!solo">
       <icon name="remove"></icon>
     </button>
   </div>
@@ -27,7 +27,7 @@
 
   export default {
     name: 'poll-option',
-    props: ['option', 'index', 'error'],
+    props: ['option', 'index', 'error', 'solo'],
     data() {
       return {
         focused: false,
@@ -74,9 +74,8 @@
 
 <style scoped>
 .item {
-  display: flex;
+  position: relative;
   margin-bottom: 16px;
-  margin-left: -56px;
   transition: 300ms all cubic-bezier(.55,0,.1,1);
 }
 
@@ -85,9 +84,11 @@
 }
 
 .item > .remove {
+  position: absolute;
   display: inline-block;
   padding: 0 16px;
-  margin-left: -40px;
+  top: 10px;
+  right: -4px;
   color: var(--color-gray);
   background: transparent;
   border: 1px solid transparent;
@@ -98,9 +99,11 @@
 }
 
 .item > .handle {
+  position: absolute;
+  top: 4px;
+  left: -56px;
   display: inline-block;
   padding: 8px 16px;
-  margin-right: 16px;
   color: var(--color-gray);
   background: transparent;
   border: 1px solid transparent;
