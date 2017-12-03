@@ -33,6 +33,7 @@
     box-shadow: var(--drop-shadow);
     cursor: pointer;
     transform: translateY(0);
+    transition: 200ms cubic-bezier(.06,.67,.37,.99) all;
   }
 
   .button.-primary {
@@ -50,7 +51,6 @@
   }
 
   .button:not(:disabled):hover {
-    transition: 200ms ease all;
     transform: translateY(-2px);
     box-shadow: var(--drop-shadow-lower);
   }
