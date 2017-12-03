@@ -1,17 +1,20 @@
 <template>
-  <button type="button" class="copy" @click="click" title="Copy to clipboard">
-    Copy
-    <span v-if="show" class="textee">
-      Copied!
+  <ui-button preset="primary" type="button" @click="click" title="Copy to clipboard">
+    <span class="copy">
+      Copy
+      <span v-if="show" class="textee">
+        Copied!
+      </span>
     </span>
-  </button>
+  </ui-button>
 </template>
 
 <script>
-  import copy from 'copy-text-to-clipboard';
+  import copy from 'copy-text-to-clipboard'
+  import UiButton from './UiButton'
 
   export default {
-    name: 'copy',
+    name: 'copy-button',
     props: {
       text: String
     },
@@ -33,6 +36,9 @@
           this.timeout = setTimeout(() => this.show = false, 250);
         });
       }
+    },
+    components: {
+      UiButton
     }
   }
 </script>
@@ -40,17 +46,6 @@
 <style scoped>
 .copy {
   position: relative;
-  display: inline-block;
-  padding: 0;
-  color: var(--color-info);
-  font-size: var(--font-smallee);
-  font-family: var(--font-family);
-  font-weight: 500;
-  text-transform: uppercase;
-  background: transparent;
-  border: 1px solid transparent;
-  cursor: pointer;
-  outline: 0;
 }
 
 .textee {

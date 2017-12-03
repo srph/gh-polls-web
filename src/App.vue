@@ -1,71 +1,74 @@
 <template>
-  <div class="container">
+  <ui-container>
     <h1 class="title-heading">GitHub Polls</h1>
 
+    <ui-alert ref="alert"></ui-alert>
+
     <div v-if="generated">
-      <header class="menu-heading">
-        <h5 class="title">Generated Poll</h5>
-        <copy :text="markdown"></copy>
-      </header>
+      <ui-panel title="Generated Poll">
+        <copy-button slot="action" :text="markdown"></copy-button>
 
-      <div class="preview-box" v-html="preview"></div>
-
-      <alert ref="alert"></alert>
+        <div slot="body" class="preview-box" v-html="preview"></div>
+      </ui-panel>
     </div>
 
     <div v-else>
-      <header class="menu-heading">
-        <h5 class="title">Poll Options</h5>
-      </header>
-
-      <div class="panel-box">
-        <draggable v-model="options" :options="{ group: 'options', handle: '.handle' }" class="inner">
-          <div class="item" v-for="(option, index) in options" :key="option">
-            <div class="handle" title="Drag item around to sort">
-              <icon name="ellipsis-v"></icon>
-            </div>
-            <input v-model="option.text" :class="{ 'form-input': true, '-danger': errors[option.id] }" type="text" placeholder="Enter option..." ref="options">
-            <button type="button" class="remove" title="Remove this option" tabindex="-1" @click="rm(index)">
-              <icon name="remove"></icon>
-            </button>
-          </div>
-        </draggable>
-
-        <button type="button" @focus="trigger" @click="add" class="add" ref="add">
-          Add another option
-        </button>
-      </div>
-
-      <alert ref="alert"></alert>
-
-      <div class="generate-action">
-        <button class="button" type="button" @click="generate" :disabled="loading">
-          <loader v-if="loading"></loader>
+      <ui-panel title="Poll Options">
+        <ui-button slot="action" type="button"
+          @click="generate"
+          :disabled="loading"
+          title="Generate the poll">
+          <ui-loader v-if="loading"></ui-loader>
           <span v-else>Generate</span>
-        </button>
-      </div>
+        </ui-button>
+
+        <div slot="body">
+          <draggable v-model="options" :options="{ group: 'options', handle: '.handle' }" class="inner">
+            <poll-option v-for="(option, index) in options"
+              :key="option.id"
+              :option="option"
+              :index="index"
+              :error="errors[option.id]"
+              ref="options"
+              @change="change"
+              @remove="rm">
+            </poll-option>
+          </draggable>
+
+          <ui-button type="button" @focus="trigger" @click="add" ref="add">
+            Add another option
+          </ui-button>
+        </div>
+      </ui-panel>
+
+      <tip></tip>
     </div>
 
     <ui-footer></ui-footer>
-  </div>
+  </ui-container>
 </template>
 
 <script>
-import axios from 'axios';
-import marked from 'marked';
-import config from './config';
-import * as utils from './utils';
-import Draggable from 'vuedraggable';
-import Alert from './Alert';
-import Copy from './Copy';
-import Footer from './Footer';
-import Loader from './Loader';
+import axios from 'axios'
+import marked from 'marked'
+import config from './config'
+import * as utils from './utils'
+import Draggable from 'vuedraggable'
+import UiContainer from './components/UiContainer'
+import UiPanel from './components/UiPanel'
+import UiButton from './components/UiButton'
+import UiAlert from './components/UiAlert'
+import UiLoader from './components/UiLoader'
+import Tip from './components/Tip'
+import PollOption from './components/PollOption'
+import CopyButton from './components/CopyButton'
+import Footer from './Footer'
 
 export default {
   name: 'app',
   data() {
     return {
-      options: [{ text: '' }],
+      options: [{ text: '', id: 0 }],
       loading: false,
       generated: false,
       errors: {},
@@ -75,7 +78,9 @@ export default {
   },
   methods: {
     trigger() {
-      this.$refs.add.click()
+      // @REFACTOR: Find a way to isolate this.
+      // e.g., allowing inner-ref like React.
+      this.$refs.add.$el.click()
     },
 
     add() {
@@ -85,6 +90,10 @@ export default {
       this.$nextTick(() => {
         this.$refs.options[this.$refs.options.length - 1].focus()
       })
+    },
+
+    change({index, value}) {
+      this.options[index].text = value
     },
 
     rm(i) {
@@ -133,10 +142,15 @@ export default {
     }
   },
   components: {
-    Alert,
-    Copy,
-    Loader,
+    CopyButton,
     Draggable,
+    PollOption,
+    Tip,
+    UiContainer,
+    UiAlert,
+    UiPanel,
+    UiButton,
+    UiLoader,
     'ui-footer': Footer
   }
 }
@@ -146,15 +160,25 @@ export default {
 :root {
   --color-white: #fff;
   --color-black: #000;
+  --color-light-silver: #f9fafb;
+  --color-silver: #d9e3ed;
   --color-gray: #B4B4B4;
   --color-dark-gray: #434343;
   --color-red: #FC6D6B;
   --color-info: #1E6EF9;
-  --color-success: #01dc87;
+  --color-green: #01dc87;
+  --color-lavender: #43458B;
+  --color-light-lavender: #6466bf;
+  --drop-shadow: 0px 2px 4px rgba(0,0,0,0.1);
+  --drop-shadow-lower: 0px 4px 4px rgba(0,0,0,0.1);
+  --border-radius: 4px;
   --form-size: 40px;
   --font-size: 14px;
+  --font-size-small: 10px;
+  --fa-size-regular: 20px;
   --font-smallee: 12px;
-  --font-family: "Proxima Nova", San Francisco, -apple-system, BlinkMacSystemFont, ".SFSNText-Regular", Segoe UI, Ubuntu, Helvetica, sans-serif;
+  --font-family: "Source Sans Pro", San Francisco, -apple-system, BlinkMacSystemFont, ".SFSNText-Regular", Segoe UI, Ubuntu, Helvetica, sans-serif;
+  --font-montserrat: "Montserrat", San Francisco, -apple-system, BlinkMacSystemFont, ".SFSNText-Regular", Segoe UI, Ubuntu, Helvetica, sans-serif;
 }
 
 * {
@@ -165,14 +189,7 @@ html, body {
   color: var(--color-black);
   font-family: var(--font-family);
   font-size: var(--font-size);
-}
-
-.container {
-  max-width: 640px;
-  margin-left: auto;
-  margin-right: auto;
-  padding-left: 16px;
-  padding-right: 16px;
+  background: var(--color-light-silver);
 }
 
 .title-heading {
@@ -183,113 +200,19 @@ html, body {
   font-size: 40px;
 }
 
-.button {
-  font-size: var(--font-smallee);
-  padding: 0 24px;
-  height: var(--form-size);
-  color: var(--color-white);
-  line-height: calc(var(--form-size) - 1);
-  font-family: var(--font-family);
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  background: var(--color-black);
-  border: 1px solid transparent;
-  cursor: pointer;
-}
-
-.button:hover {
-  background: var(--color-dark-gray);
-  transition: 100ms all ease;
-}
-
-.button:disabled {
-  cursor: not-allowed;
-}
-
-.generate-action {
-  text-align: center;
-}
-
-.form-input {
-  display: block;
-  width: 100%;
-  padding: 0 8px;
-  color: var(--color-dark-gray);
-  height: var(--form-size);
-  font-family: var(--font-family);
-  line-height: calc(var(--form-size) - 1);
-  border: 1px solid var(--color-gray);
-}
-
-.form-input:focus {
-  outline: 0;
-  border-color: var(--color-info);
-}
-
-.form-input.-danger {
-  border-color: var(--color-red);
-}
-
-.panel-box {
-  margin-bottom: 64px;
-}
-
-.panel-box .item {
-  display: flex;
-  margin-bottom: 16px;
-  margin-left: -40px;
-  transition: 300ms all cubic-bezier(.55,0,.1,1);
-}
-
-.panel-box .item.sortable-chosen {
-  opacity: 0.2;
-}
-
-.panel-box .item > .remove {
-  display: inline-block;
-  padding: 0 16px;
-  color: var(--color-red);
-  background: transparent;
-  border: 1px solid transparent;
-  cursor: pointer;
-}
-
-.panel-box .item > .handle {
-  display: inline-block;
-  padding: 8px 16px;
-  color: var(--color-black);
-  background: transparent;
-  border: 1px solid transparent;
-  cursor: grab;
-}
-
-.panel-box > .add {
-  display: inline-block;
-  padding: 0;
-  color: var(--color-gray);
-  background: transparent;
-  border: 1px solid transparent;
-  font-family: var(--font-family);
-  cursor: pointer;
-}
-
 .preview-box {
-  margin-bottom: 64px;
-  padding: 8px;
   text-align: center;
-  border: 1px solid var(--color-gray);
 }
 
-.menu-heading {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 24px;
-}
+/**
+ * https://github.com/Justineo/vue-awesome#styling
+ */
+.fa-icon {
+  width: auto;
+  height: 1em; /* or any other relative font sizes */
 
-.menu-heading > .title {
-  margin: 0;
-  font-size: var(--font-smallee);
-  text-transform: uppercase;
+  /* You would have to include the following two lines to make this work in Safari */
+  max-width: 100%;
+  max-height: 100%;
 }
 </style>

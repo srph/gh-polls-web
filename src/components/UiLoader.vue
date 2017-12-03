@@ -17,7 +17,7 @@
     display: inline-block;
     width: 8px;
     height: 8px;
-    background-color: var(--color-white);
+    background-color: var(--color-silver);
     border-radius: 50%;
     animation: 0.5s infinite ease-in-out;
     animation-name: pop;
