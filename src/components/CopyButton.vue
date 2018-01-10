@@ -52,7 +52,8 @@
 .textee {
   position: absolute;
   bottom: 0;
-  left: 0;
+  left: 50%;
+  color: var(--color-lavender);
   animation-name: copy-floatee;
   animation-iteration-count: 1;
   animation-duration: 300ms;
@@ -61,7 +62,7 @@
 
 @keyframes copy-floatee {
   0% {
-    transform: translateY(0);
+    transform: translateY(-8px) translateX(-50%);
   }
 
   30% {
@@ -70,7 +71,7 @@
 
   100% {
     opacity: 0;
-    transform: translateY(-32px);
+    transform: translateY(-40px) translateX(-50%);
   }
 }
 </style>

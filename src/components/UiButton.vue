@@ -39,6 +39,7 @@
   .button.-primary {
     color: var(--color-white);
     background: var(--color-lavender);
+    outline: 0;
   }
 
   .button.-primary:hover {
