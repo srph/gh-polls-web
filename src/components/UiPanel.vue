@@ -38,6 +38,14 @@
     border-bottom: 0;
   }
 
+  .panel > .heading > .action {
+    display: flex;
+  }
+
+  .panel > .heading > .action > button:not(:last-child) {
+    margin-right: 4px;
+  }
+
   .panel > .heading > .text {
     margin: 0;
     color: var(--color-lavender);

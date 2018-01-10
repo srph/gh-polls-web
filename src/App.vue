@@ -7,7 +7,8 @@
     <div class="main-content">
       <div v-if="generated">
         <ui-panel title="Generated Poll">
-          <copy-button slot="action" :text="markdown"></copy-button>
+          <copy-button slot="action" :text="preview" entity="HTML"></copy-button>
+          <copy-button slot="action" :text="markdown" entity="Markdown"></copy-button>
 
           <div slot="body" class="preview-box" v-html="preview"></div>
         </ui-panel>
