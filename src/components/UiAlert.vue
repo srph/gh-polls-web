@@ -26,7 +26,7 @@
     },
     methods: {
       notify(type, message) {
-        if (type !== 'success') clearTimeout(this.timeout)
+        clearTimeout(this.timeout)
         this.type = type
         this.message = message
         if (type !== 'success') this.timeout = setTimeout(this.remove, 5000)
