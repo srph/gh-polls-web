@@ -1,5 +1,5 @@
 <template>
-  <ui-button preset="primary" type="button" @click="click" title="Copy generated poll markdown to clipboard">
+  <ui-button :preset="preset" type="button" @click="click" title="Copy generated poll markdown to clipboard">
     <span class="copy">
       Copy {{ entity }}
       <span v-if="show" class="textee">
@@ -17,7 +17,8 @@
     name: 'copy-button',
     props: {
       text: String,
-      entity: String
+      entity: String,
+      preset: String
     },
     data() {
       return {

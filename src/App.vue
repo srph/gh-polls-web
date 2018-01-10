@@ -8,7 +8,7 @@
       <div v-if="generated">
         <ui-panel title="Generated Poll">
           <copy-button slot="action" :text="preview" entity="HTML"></copy-button>
-          <copy-button slot="action" :text="markdown" entity="Markdown"></copy-button>
+          <copy-button slot="action" :text="markdown" preset="primary" entity="Markdown"></copy-button>
 
           <div slot="body" class="preview-box" v-html="preview"></div>
         </ui-panel>
@@ -19,6 +19,7 @@
           <ui-button slot="action" type="button"
             @click="generate"
             :disabled="loading"
+            preset="primary"
             title="Generate the poll">
             <ui-loader v-if="loading"></ui-loader>
             <span v-else>Generate</span>
