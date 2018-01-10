@@ -120,7 +120,7 @@ export default {
 
       return axios.post('/poll', { options: this.options.map(o => o.text) })
         .then(res => {
-          this.$refs.alert.notify('success', 'The poll was successfully generated!');
+          this.$refs.alert.notify('success', 'You may now copy the generated poll to GitHub or any markdown editor.');
           this.loading = false
           this.generated = true
           this.id = res.data.id
